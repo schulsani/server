@@ -15,7 +15,7 @@ if($_POST['pw'] == "Geheim") {
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
    </head>
    <body>
-      <form action="action.php" method="post">
+      <form action="insert.php" method="post">
         Raum(max.Zeichen 15)<br>
         <input type="text" maxlength="15" name="field1"><br>
         Unfall(max.Zeichen 13)<br>
