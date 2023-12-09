@@ -1,0 +1,233 @@
+[
+    {
+        "id": "82e56c5416ceb0b7",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "5b98a8ac.a46758",
+        "type": "http in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "url": "/data",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1200,
+        "y": 960,
+        "wires": [
+            [
+                "bba61009.4459f",
+                "bd816b76af90f11e"
+            ]
+        ]
+    },
+    {
+        "id": "bba61009.4459f",
+        "type": "template",
+        "z": "82e56c5416ceb0b7",
+        "name": "unfall abgesendet page/ daten emmpfangen",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<!DOCTYPE HTML>\n<html>\n    <head>\n    <title>Simple Live Display</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.fritz.box:1880/ws/data\";\n    \n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n        function wsConnect() {\n            console.log(\"connect\",wsUri);\n            ws = new WebSocket(wsUri);\n            //var line = \"\";    // either uncomment this for a building list of messages\n            ws.onmessage = function(msg) {\n                var line = \"\";  // or uncomment this to overwrite the existing message\n                // parse the incoming message as a JSON object\n                var data = msg.data;\n                //console.log(data);\n                // build the output from the topic and payload parts of the object\n                line += \"<p>\"+data+\"</p>\";\n                // replace the messages div with the new \"line\"\n                document.getElementById('messages').innerHTML = line;\n                //ws.send(JSON.stringify({data:data}));\n            }\n            ws.onopen = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"\";\n                //ws.send(\"Open for data\");\n                console.log(\"connected\");\n            }\n            ws.onclose = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"Error getting the Status\";\n                // in case of lost connection tries to reconnect every 3 secs\n                setTimeout(wsConnect,3000);\n            }\n        }\n    </script>\n    </head>\n    <body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n        <font face=\"Arial\">\n        <h1>Simple Live Display</h1>\n        <div id=\"messages\">Unfall wurde abgesendet wartet auf Bestätigung</div>\n        <hr/>\n        <div id=\"status\"></div>\n        </font>\n    </body>\n</html>",
+        "x": 1510,
+        "y": 960,
+        "wires": [
+            [
+                "6ceb930a.93146c"
+            ]
+        ]
+    },
+    {
+        "id": "6ceb930a.93146c",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1670,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "bd816b76af90f11e",
+        "type": "mqtt out",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "topic": "send",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "61de5090.0f5d9",
+        "x": 1395,
+        "y": 1020,
+        "wires": [],
+        "l": false
+    },
+    {
+        "id": "ce22bd8f7a55d6d9",
+        "type": "inject",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "unfall",
+        "payloadType": "msg",
+        "x": 1270,
+        "y": 1040,
+        "wires": [
+            [
+                "bd816b76af90f11e"
+            ]
+        ]
+    },
+    {
+        "id": "7ff95a34e99d400c",
+        "type": "websocket out",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "server": "fc0e0a42a2d7faab",
+        "client": "",
+        "x": 1470,
+        "y": 1140,
+        "wires": []
+    },
+    {
+        "id": "22db17054a39dbef",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1570,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "ae0eeaa269e5b0c8",
+        "type": "http in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "url": "/data",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 1080,
+        "y": 880,
+        "wires": [
+            [
+                "4ce9a5b469f7276a"
+            ]
+        ]
+    },
+    {
+        "id": "4ce9a5b469f7276a",
+        "type": "template",
+        "z": "82e56c5416ceb0b7",
+        "name": "redict to form",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "<meta http-equiv=\"refresh\" content = \"0;url=http://schulsani.local/form.php\">\n",
+        "x": 1330,
+        "y": 900,
+        "wires": [
+            [
+                "22db17054a39dbef"
+            ]
+        ]
+    },
+    {
+        "id": "7976439524eb4997",
+        "type": "mqtt in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "topic": "alarm",
+        "qos": "0",
+        "datatype": "auto-detect",
+        "broker": "61de5090.0f5d9",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 1050,
+        "y": 1160,
+        "wires": [
+            [
+                "761d46d0999ef86a",
+                "7ff95a34e99d400c"
+            ]
+        ]
+    },
+    {
+        "id": "761d46d0999ef86a",
+        "type": "debug",
+        "z": "82e56c5416ceb0b7",
+        "name": "Alarm beenden",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 1380,
+        "wires": []
+    },
+    {
+        "id": "61de5090.0f5d9",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "localhost",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "fc0e0a42a2d7faab",
+        "type": "websocket-listener",
+        "path": "/ws/data",
+        "wholemsg": "false"
+    }
+]
