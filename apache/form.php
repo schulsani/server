@@ -9,6 +9,7 @@ if($_POST['pw'] == "Geheim") {
    
    
 }
+$verificationCode = "your ultimate Code"
 ?>
 </html>
 <html>
@@ -18,12 +19,13 @@ if($_POST['pw'] == "Geheim") {
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
    </head>
    <body>
-      <form action="http://schulsani.fritz.box:1880/data"  method="post">
-        Raum(max.Zeichen 15)<br>
-        <input type="text" maxlength="15" name="raum"><br>
-        Unfall(max.Zeichen 13)<br>
-        <input type="text" maxlength="13" name="unfall"><br>
+      <form action="http://schulsani.local:1880/data"  method="post">
+        Raum(max.Zeichen 20)<br>
+        <input type="text" maxlength="20" name="raum"><br>
+        Unfall(max.Zeichen 18)<br>
+        <input type="text" maxlength="18" name="unfall"><br>
         <input type="hidden" name="alarm" value="on">
+        <input type="hidden" name="code" value="<?php echo $verificationCode; ?>">
          <input type="submit" value="Submit">
       </form>
    </body>
