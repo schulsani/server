@@ -9,6 +9,9 @@ if($_POST['pw'] == "Geheim") {
    
    
 }
+$cookie_name = "password";
+$cookie_value = $_POST['pw'];
+setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/"); // 86400 = 1 day
 ?>
 </html>
 <html>
