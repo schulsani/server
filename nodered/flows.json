@@ -16,12 +16,15 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 1200,
-        "y": 960,
+        "x": 720,
+        "y": 1040,
         "wires": [
             [
                 "bba61009.4459f",
-                "bd816b76af90f11e"
+                "adcd01dc12eb632c",
+                "a4dc7d1085cd2a2c",
+                "f10c4cfae8961698",
+                "93877192a651fefb"
             ]
         ]
     },
@@ -34,8 +37,8 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE HTML>\n<html>\n    <head>\n    <title>Simple Live Display</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.fritz.box:1880/ws/data\";\n    \n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n        function wsConnect() {\n            console.log(\"connect\",wsUri);\n            ws = new WebSocket(wsUri);\n            //var line = \"\";    // either uncomment this for a building list of messages\n            ws.onmessage = function(msg) {\n                var line = \"\";  // or uncomment this to overwrite the existing message\n                // parse the incoming message as a JSON object\n                var data = msg.data;\n                //console.log(data);\n                // build the output from the topic and payload parts of the object\n                line += \"<p>\"+data+\"</p>\";\n                // replace the messages div with the new \"line\"\n                document.getElementById('messages').innerHTML = line;\n                //ws.send(JSON.stringify({data:data}));\n            }\n            ws.onopen = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"\";\n                //ws.send(\"Open for data\");\n                console.log(\"connected\");\n            }\n            ws.onclose = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"Error getting the Status\";\n                // in case of lost connection tries to reconnect every 3 secs\n                setTimeout(wsConnect,3000);\n            }\n        }\n    </script>\n    </head>\n    <body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n        <font face=\"Arial\">\n        <h1>Simple Live Display</h1>\n        <div id=\"messages\">Unfall wurde abgesendet wartet auf Bestätigung</div>\n        <hr/>\n        <div id=\"status\"></div>\n        </font>\n    </body>\n</html>",
-        "x": 1510,
+        "template": "<!DOCTYPE HTML>\n<html>\n    <head>\n    <title>Unfall abgesendet</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.local:1880/ws/data\";\n    \n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n        function wsConnect() {\n            console.log(\"connect\",wsUri);\n            ws = new WebSocket(wsUri);\n            //var line = \"\";    // either uncomment this for a building list of messages\n            ws.onmessage = function(msg) {\n                var line = \"\";  // or uncomment this to overwrite the existing message\n                // parse the incoming message as a JSON object\n                var data = msg.data;\n                //console.log(data);\n                // build the output from the topic and payload parts of the object\n                line += \"<p>\"+data+\"</p>\";\n                // replace the messages div with the new \"line\"\n                document.getElementById('messages').innerHTML = line;\n                //ws.send(JSON.stringify({data:data}));\n            }\n            ws.onopen = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"\";\n                //ws.send(\"Open for data\");\n                console.log(\"connected\");\n            }\n            ws.onclose = function() {\n                // update the status div with the connection status\n                document.getElementById('status').innerHTML = \"Error getting the Status\";\n                // in case of lost connection tries to reconnect every 3 secs\n                setTimeout(wsConnect,3000);\n            }\n        }\n    </script>\n    </head>\n    <body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n        <font face=\"Arial\">\n        <div id=\"messagess\"> </div>\n        <div id=\"messages\">Unfall wurde abgesendet wartet auf Bestätigung</div>\n        <hr/>\n        <div id=\"status\"></div>\n        </font>\n    </body>\n</html>",
+        "x": 1410,
         "y": 960,
         "wires": [
             [
@@ -50,8 +53,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1670,
-        "y": 1100,
+        "x": 1870,
+        "y": 960,
         "wires": []
     },
     {
@@ -60,16 +63,16 @@
         "z": "82e56c5416ceb0b7",
         "name": "",
         "topic": "send",
-        "qos": "",
-        "retain": "",
+        "qos": "0",
+        "retain": "false",
         "respTopic": "",
         "contentType": "",
         "userProps": "",
         "correl": "",
         "expiry": "",
         "broker": "61de5090.0f5d9",
-        "x": 1395,
-        "y": 1020,
+        "x": 1805,
+        "y": 1080,
         "wires": [],
         "l": false
     },
@@ -81,9 +84,6 @@
         "props": [
             {
                 "p": "payload"
-            },
-            {
-                "p": "payload"
             }
         ],
         "repeat": "",
@@ -93,8 +93,8 @@
         "topic": "",
         "payload": "unfall",
         "payloadType": "msg",
-        "x": 1270,
-        "y": 1040,
+        "x": 1990,
+        "y": 1180,
         "wires": [
             [
                 "bd816b76af90f11e"
@@ -108,8 +108,8 @@
         "name": "",
         "server": "fc0e0a42a2d7faab",
         "client": "",
-        "x": 1470,
-        "y": 1140,
+        "x": 1690,
+        "y": 1220,
         "wires": []
     },
     {
@@ -171,12 +171,12 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 1050,
-        "y": 1160,
+        "x": 1450,
+        "y": 1400,
         "wires": [
             [
-                "761d46d0999ef86a",
-                "7ff95a34e99d400c"
+                "7ff95a34e99d400c",
+                "761d46d0999ef86a"
             ]
         ]
     },
@@ -193,15 +193,107 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1320,
-        "y": 1380,
+        "x": 1860,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "0b0182ddb2022024",
+        "type": "mysql",
+        "z": "82e56c5416ceb0b7",
+        "mydb": "3e05ca2c6348c110",
+        "name": "",
+        "x": 1080,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "adcd01dc12eb632c",
+        "type": "function",
+        "z": "82e56c5416ceb0b7",
+        "name": "function 1",
+        "func": "const jsonString = msg.payload;\ntry {\n    const payload = JSON.parse(jsonString);\n\n    // Nun kannst du auf die einzelnen Werte zugreifen\n    var raum = msg.payload.raum;\n    var unfall = msg.payload.unfall;\n    var alarm = msg.payload.alarm;\n    var code = msg.payload.code;\n\n\n    console.log('Raum:', raum);\n    console.log('Unfall:', unfall);\n    console.log('Alarm:', alarm);\n    console.log('Code:', code);\n    return msg;\n} catch (error) {\n    console.error('Fehler beim Parsen der JSON-Antwort:', error);\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1160,
+        "y": 1240,
+        "wires": [
+            [
+                "a4dc7d1085cd2a2c"
+            ]
+        ]
+    },
+    {
+        "id": "c3a377b8f48a1399",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Flow to insert data into the database",
+        "info": "",
+        "x": 1220,
+        "y": 2180,
+        "wires": []
+    },
+    {
+        "id": "a4dc7d1085cd2a2c",
+        "type": "debug",
+        "z": "82e56c5416ceb0b7",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1140,
+        "y": 1460,
+        "wires": []
+    },
+    {
+        "id": "f10c4cfae8961698",
+        "type": "json",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "property": "payload",
+        "action": "str",
+        "pretty": false,
+        "x": 1170,
+        "y": 1040,
+        "wires": [
+            [
+                "bd816b76af90f11e"
+            ]
+        ]
+    },
+    {
+        "id": "93877192a651fefb",
+        "type": "debug",
+        "z": "82e56c5416ceb0b7",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1560,
+        "y": 1140,
         "wires": []
     },
     {
         "id": "61de5090.0f5d9",
         "type": "mqtt-broker",
         "name": "",
-        "broker": "localhost",
+        "broker": "schulsani.local",
         "port": "1883",
         "clientid": "",
         "autoConnect": true,
@@ -229,5 +321,15 @@
         "type": "websocket-listener",
         "path": "/ws/data",
         "wholemsg": "false"
+    },
+    {
+        "id": "3e05ca2c6348c110",
+        "type": "MySQLdatabase",
+        "name": "",
+        "host": "127.0.0.1",
+        "port": "3306",
+        "db": "schulsani",
+        "tz": "",
+        "charset": "UTF8"
     }
 ]
