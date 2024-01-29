@@ -16,12 +16,13 @@
         "method": "post",
         "upload": false,
         "swaggerDoc": "",
-        "x": 560,
-        "y": 1200,
+        "x": 400,
+        "y": 1320,
         "wires": [
             [
                 "f10c4cfae8961698",
-                "bba61009.4459f"
+                "bba61009.4459f",
+                "89d56c6a7ff64869"
             ]
         ]
     },
@@ -35,8 +36,8 @@
         "format": "handlebars",
         "syntax": "mustache",
         "template": "<!DOCTYPE HTML>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Unfall abgesendet</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.local:1880/ws/data\";\n\n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n\n        function wsConnect() {\n            console.log(\"connect\", wsUri);\n            ws = new WebSocket(wsUri);\n\n            ws.onmessage = function (msg) {\n                var line = \"Unfall wurde abgesendet und wartet auf Bestätigung\";\n                var data = msg.data;\n                line += \"<p>\" + data + \"</p>\";\n                document.getElementById('messages').innerHTML = line;\n            }\n\n            ws.onopen = function () {\n                document.getElementById('status').innerHTML = \"Verbunden\";\n                console.log(\"Verbunden\");\n            }\n\n            ws.onclose = function () {\n                document.getElementById('status').innerHTML = \"Fehler beim Herstellen der Verbindung\";\n                setTimeout(wsConnect, 3000);\n            }\n        }\n    </script>\n    <style>\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            height: 100vh;\n        }\n\n\n        #messages {\n            max-width: 400px;\n            width: 100%;\n            padding: 20px;\n            box-sizing: border-box;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            margin-top: 20px; /* Added margin for separation from logos */\n        }\n\n\n\n        #status {\n            font-style: italic;\n        }\n            header {\n      background-color: #ffffff;\n      padding: 20px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    header img#logo2 {\n      max-width: 200px;\n      height: auto;\n      margin-right: 20px;\n      margin-left: 10px;\n    }\n\n    header img#logo1 {\n      max-width: 50px;\n      height: auto;\n      margin-left: 20px;\n      margin-right: 10px;\n\n    }\n\n    </style>\n</head>\n  <header>\n    <img id=\"logo1\" src=\"http://schulsani.local/jf_logo.png\" alt=\"Logo 1\">\n    <img id=\"logo2\" src=\"http://schulsani.local/ohg_logo.png\" alt=\"Logo 2\">\n  </header>\n\n<body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n    <div id=\"messages\">Unfall wurde abgesendet und wartet auf Bestätigung</div>\n    <hr/>\n    <div id=\"status\"></div>\n</body>\n</html>",
-        "x": 1330,
-        "y": 1180,
+        "x": 1490,
+        "y": 1460,
         "wires": [
             [
                 "6ceb930a.93146c"
@@ -51,7 +52,7 @@
         "statusCode": "",
         "headers": {},
         "x": 1870,
-        "y": 960,
+        "y": 1460,
         "wires": []
     },
     {
@@ -68,8 +69,8 @@
         "correl": "",
         "expiry": "",
         "broker": "61de5090.0f5d9",
-        "x": 1805,
-        "y": 1100,
+        "x": 2045,
+        "y": 660,
         "wires": [],
         "l": false
     },
@@ -90,8 +91,8 @@
         "topic": "",
         "payload": "unfall",
         "payloadType": "msg",
-        "x": 2130,
-        "y": 960,
+        "x": 2450,
+        "y": 640,
         "wires": [
             [
                 "bd816b76af90f11e"
@@ -105,8 +106,8 @@
         "name": "",
         "server": "fc0e0a42a2d7faab",
         "client": "",
-        "x": 1690,
-        "y": 1220,
+        "x": 1770,
+        "y": 1820,
         "wires": []
     },
     {
@@ -116,8 +117,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 1570,
-        "y": 880,
+        "x": 1310,
+        "y": 1980,
         "wires": []
     },
     {
@@ -129,8 +130,8 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 1160,
-        "y": 1120,
+        "x": 400,
+        "y": 1980,
         "wires": [
             [
                 "4ce9a5b469f7276a"
@@ -147,8 +148,8 @@
         "format": "html",
         "syntax": "mustache",
         "template": "<meta http-equiv=\"refresh\" content = \"0;url=http://schulsani.local/form.php\">\n",
-        "x": 1410,
-        "y": 1120,
+        "x": 950,
+        "y": 1980,
         "wires": [
             [
                 "22db17054a39dbef"
@@ -168,8 +169,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 0,
-        "x": 1450,
-        "y": 1400,
+        "x": 2050,
+        "y": 1600,
         "wires": [
             [
                 "7ff95a34e99d400c",
@@ -190,8 +191,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1860,
-        "y": 1580,
+        "x": 2180,
+        "y": 1700,
         "wires": []
     },
     {
@@ -200,8 +201,8 @@
         "z": "82e56c5416ceb0b7",
         "mydb": "3e05ca2c6348c110",
         "name": "",
-        "x": 1080,
-        "y": 480,
+        "x": 1480,
+        "y": 1280,
         "wires": [
             []
         ]
@@ -210,16 +211,16 @@
         "id": "adcd01dc12eb632c",
         "type": "function",
         "z": "82e56c5416ceb0b7",
-        "name": "function 1",
-        "func": "const jsonString = msg.payload;\ntry {\n    const payload = JSON.parse(jsonString);\n\n    // Nun kannst du auf die einzelnen Werte zugreifen\n    var raum = msg.payload.raum;\n    var unfall = msg.payload.unfall;\n    var alarm = msg.payload.alarm;\n    var code = msg.payload.code;\n\n\n    console.log('Raum:', raum);\n    console.log('Unfall:', unfall);\n    console.log('Alarm:', alarm);\n    console.log('Code:', code);\n    return msg;\n} catch (error) {\n    console.error('Fehler beim Parsen der JSON-Antwort:', error);\n}\n",
+        "name": "Sort Data",
+        "func": "const jsonString = msg.payload;\ntry {\n    const payload = JSON.parse(jsonString);\n\n    // Nun kannst du auf die einzelnen Werte zugreifen\n    var raum = payload.raum;\n    var unfall = payload.unfall;\n    var art = payload.type;\n\n    msg.payload = \"Raum : \" + raum + \" Unfall : \" + unfall + \" Art : \" + art\n    return msg;\n} catch (error) {\n    console.error('Fehler beim Parsen der JSON-Antwort:', error);\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 1300,
+        "x": 1120,
+        "y": 1080,
         "wires": [
             [
                 "a4dc7d1085cd2a2c"
@@ -227,20 +228,10 @@
         ]
     },
     {
-        "id": "c3a377b8f48a1399",
-        "type": "comment",
-        "z": "82e56c5416ceb0b7",
-        "name": "Flow to insert data into the database",
-        "info": "",
-        "x": 1220,
-        "y": 2180,
-        "wires": []
-    },
-    {
         "id": "a4dc7d1085cd2a2c",
         "type": "debug",
         "z": "82e56c5416ceb0b7",
-        "name": "debug 1",
+        "name": "SHOW DATA",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -249,8 +240,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1200,
-        "y": 1460,
+        "x": 1390,
+        "y": 1080,
         "wires": []
     },
     {
@@ -261,8 +252,8 @@
         "property": "payload",
         "action": "str",
         "pretty": false,
-        "x": 810,
-        "y": 1080,
+        "x": 590,
+        "y": 1100,
         "wires": [
             [
                 "b8258d69c583f91a",
@@ -292,40 +283,22 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 850,
-        "y": 800,
+        "x": 1130,
+        "y": 780,
         "wires": [
             [
-                "00d9a376712756df",
-                "8e3b53ca09758b9f"
+                "00d9a376712756df"
             ],
             [
-                "ae07f02ffc9804ad"
+                "98354cd3c321a215"
             ]
         ]
-    },
-    {
-        "id": "ae07f02ffc9804ad",
-        "type": "debug",
-        "z": "82e56c5416ceb0b7",
-        "name": "debug 4",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1200,
-        "y": 1220,
-        "wires": []
     },
     {
         "id": "b8258d69c583f91a",
         "type": "function",
         "z": "82e56c5416ceb0b7",
-        "name": "function 2",
+        "name": "Extract type",
         "func": "// Extrahiere den Typ (type) aus dem JSON-String im Payload\nvar inputPayload = msg.payload;\n\ntry {\n    // Versuche, den JSON-String zu parsen\n    var jsonData = JSON.parse(inputPayload);\n\n    // Extrahiere den Typ aus dem JSON-Objekt\n    var outputType = jsonData.type;\n\n    // Setze den extrahierten Typ als Payload in der Ausgangsnachricht\n    msg.payload = { type: outputType,msg: jsonData };\n    \n    // Gib die Nachricht zurück\n    return msg;\n} catch (error) {\n    // Bei einem Fehler (z. B. ungültiges JSON) gebe eine Fehlermeldung zurück\n    return { payload: \"Fehler beim Parsen des JSON-Strings\" };\n}\n",
         "outputs": 1,
         "timeout": 0,
@@ -333,39 +306,12 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 900,
+        "x": 830,
+        "y": 920,
         "wires": [
             [
                 "a83e734ceeb011a6"
             ]
-        ]
-    },
-    {
-        "id": "8fda6129c1369a89",
-        "type": "inject",
-        "z": "82e56c5416ceb0b7",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 1520,
-        "y": 820,
-        "wires": [
-            []
         ]
     },
     {
@@ -380,8 +326,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1840,
-        "y": 720,
+        "x": 1520,
+        "y": 660,
         "wires": [
             [
                 "bd816b76af90f11e"
@@ -389,10 +335,61 @@
         ]
     },
     {
-        "id": "96e2e675791d0dec",
+        "id": "b36aa30.3a7276",
+        "type": "http request",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 2130,
+        "y": 860,
+        "wires": [
+            [
+                "1ef9987c.956c78"
+            ]
+        ]
+    },
+    {
+        "id": "70154cd4.de1444",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1790,
+        "y": 860,
+        "wires": [
+            [
+                "b36aa30.3a7276"
+            ]
+        ]
+    },
+    {
+        "id": "1ef9987c.956c78",
         "type": "debug",
         "z": "82e56c5416ceb0b7",
-        "name": "debug 5",
+        "name": "Response",
         "active": true,
         "tosidebar": true,
         "console": false,
@@ -401,39 +398,211 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1440,
-        "y": 1720,
+        "x": 2500,
+        "y": 860,
         "wires": []
     },
     {
-        "id": "8e3b53ca09758b9f",
-        "type": "template",
+        "id": "98354cd3c321a215",
+        "type": "function",
         "z": "82e56c5416ceb0b7",
-        "name": "",
-        "field": "payload",
-        "fieldType": "msg",
-        "format": "handlebars",
-        "syntax": "mustache",
-        "template": "{\n  \"messages\": [\n    {\n      \"voice\": \"female\",\n      \"require_input\": 0,\n      \"to\": \"+4917647058784\",\n      \"source\": \"source\",\n      \"body\": \"body\",\n      \"lang\": \"de-de\",\n      \"custom_string\": \"custom_string\",\n      \"machine_detection\": 0\n    }\n  ]\n}\nreturn msg;",
-        "output": "str",
-        "x": 980,
-        "y": 1660,
+        "name": "function 4",
+        "func": "// Access the properties of msg.payload.msg directly\nvar jsonData = msg.payload.msg;\n\n// Check if the required fields are present in the message object\nif (jsonData && jsonData.raum && jsonData.unfall) {\n    var raum = jsonData.raum;\n    var unfall = jsonData.unfall;\n    var message = 'Folgender Unfall ist passiert: In ' + raum + ' ist ' + unfall + ' passiert.' + ' Unfall bestätgen: http://schulsani.local:1880/confirm';\n\n    // Construct the URL with proper encoding\n    var phoneNumber = '4917647058784'; // Replace with your phone number\n    var apiKey = '3267041'; // Replace with your API key\n    var whatsappURL = 'https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(phoneNumber) + '&text=' + encodeURIComponent(message) + '&apikey=' + encodeURIComponent(apiKey);\n\n    // Set the constructed URL as the payload in the output message\n    msg.payload = whatsappURL;\n\n    // Return the message\n    return msg;\n} else {\n    // If required fields are missing in the message object, return an error message\n    return { payload: \"Erforderliche Felder (raum und unfall) im Nachrichtenobjekt fehlen.\" };\n}\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1420,
+        "y": 860,
         "wires": [
             [
-                "7ad789aa86bfabd2"
+                "70154cd4.de1444"
             ]
         ]
     },
     {
-        "id": "7ad789aa86bfabd2",
-        "type": "twilio out",
+        "id": "bddb1133cefe09c5",
+        "type": "http in",
         "z": "82e56c5416ceb0b7",
-        "twilio": "a40f4bff909beffd",
-        "twilioType": "call",
-        "url": "",
-        "number": "+4917647058784",
         "name": "",
-        "x": 1230,
+        "url": "/confirm",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 410,
+        "y": 1720,
+        "wires": [
+            [
+                "2f6934b6547fbe26"
+            ]
+        ]
+    },
+    {
+        "id": "2f6934b6547fbe26",
+        "type": "template",
+        "z": "82e56c5416ceb0b7",
+        "name": "site",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "html",
+        "syntax": "mustache",
+        "template": "Unfall wurde bestätigt",
+        "x": 910,
+        "y": 1720,
+        "wires": [
+            [
+                "d149870cf9632e81",
+                "4e31ff7d6dab8a7d"
+            ]
+        ]
+    },
+    {
+        "id": "d149870cf9632e81",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 1310,
+        "y": 1800,
+        "wires": []
+    },
+    {
+        "id": "4e31ff7d6dab8a7d",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Der Alarm wurde vom Ersthelfer bestätigt",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1310,
+        "y": 1700,
+        "wires": [
+            [
+                "7ff95a34e99d400c"
+            ]
+        ]
+    },
+    {
+        "id": "89d56c6a7ff64869",
+        "type": "function",
+        "z": "82e56c5416ceb0b7",
+        "name": "Prepare MSQL",
+        "func": "var jsonData = msg.payload;\n\n// Extract properties from jsonData\nvar raum = jsonData.raum;\nvar helfer = jsonData.type;\nvar Art = jsonData.unfall;\n\n// Ensure that extracted values are not null\nif (raum !== undefined && helfer !== undefined && Art !== undefined) {\n    // Construct SQL query\n    msg.topic = \"INSERT INTO data (`Raum`, `Helfer`, `Art`) VALUES (?, ?, ?);\";\n    msg.payload = [raum, helfer, Art];\n} else {\n    node.error(\"One or more properties are missing in jsonData\");\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1080,
+        "y": 1320,
+        "wires": [
+            [
+                "0b0182ddb2022024"
+            ]
+        ]
+    },
+    {
+        "id": "064a9de86b15f156",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "When Confirmation Page is reloaded redict to Formular",
+        "info": "",
+        "x": 1000,
+        "y": 1920,
+        "wires": []
+    },
+    {
+        "id": "f5c6205266524993",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Save to Mysql for Analytics",
+        "info": "",
+        "x": 1490,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "1047f7a5040f1e79",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Print Data for Debug",
+        "info": "",
+        "x": 1150,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f66a245697d8bf68",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Sort beetween Schulsanitätern und Ersthelfern",
+        "info": "",
+        "x": 1110,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "1370053d4176e90a",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Send MQTT Respond to activate Pager",
+        "info": "",
+        "x": 1990,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "efb078da8cda9e7c",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "# Beta # Alarm the Ersthelfer via Whatsapp",
+        "info": "",
+        "x": 2040,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "6d74f9ca5f0ba5ef",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "Show Confirmation on Confirmation Page",
+        "info": "",
+        "x": 1700,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "733ce94ba2aff857",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "receive Confirmation from Pager",
+        "info": "",
+        "x": 2170,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "e6a7ead8392a7b9b",
+        "type": "comment",
+        "z": "82e56c5416ceb0b7",
+        "name": "# Beta # receive confirmation from Ersthelfer via confirmation link",
+        "info": "",
+        "x": 1070,
         "y": 1640,
         "wires": []
     },
@@ -479,12 +648,5 @@
         "db": "schulsani",
         "tz": "",
         "charset": "UTF8"
-    },
-    {
-        "id": "a40f4bff909beffd",
-        "type": "twilio-api",
-        "name": "",
-        "sid": "AC43575bfd9ee32156c1b111c816167d28",
-        "from": "+1 224 269 6574"
     }
 ]
