@@ -87,15 +87,30 @@
         header("Refresh: 2; url=index.html");
         exit();
     }
+    session_start();    
+    // URL of the API endpoint
+$apiUrl = "http://schulsani.local:1880/key";
 
-    session_start();
+// Make HTTP request to the API endpoint
+$response = file_get_contents($apiUrl);
+// Check for errors
+if ($response === false) {
+    // Handle error when unable to retrieve data from the API
+    echo "Error: Unable to retrieve data from the API";
+} else {
+    // Decode the JSON response
+    $data = json_decode($response, true);
 
-    // Generate a random verification code and store it in the session
-    $verificationCode = md5(uniqid(rand(), true));
-    $_SESSION['verification_code'] = $verificationCode;
+    // Check if API key exists in the response
+    if (isset($data['key'])) {
+        // Retrieve the API key
+        $apiKey = $data['key'];
+    }
+}
+
     ?>
 
-    <form action="http://schulsani.local:1880/data" method="post">
+    <form action="http://schulsani.local:1880/data?key=<?php echo $apiKey ?>" method="post">
         <label for="type">Art der Helfer:</label>
         <select id="type" name="type">
             <option>Schulsanit&auml;ter</option>
@@ -107,11 +122,11 @@
 
         <label for="unfall">Unfall (max.Zeichen 18):</label>
         <input type="text" id="unfall" maxlength="18" name="unfall">
-
-        <input type="hidden" name="verification_code" value="<?php echo $verificationCode; ?>">
-        <input type="hidden" name="alarm" value="1">
-
+        <input type="hidden" name="alarm" value="2">
         <input type="submit" value="Submit">
     </form>
 </body>
+<footer>
+Made with &#10084; by Paul Schmid. <a href="https://github.com/schulsani">Github</a>
+</footer>
 </html>
