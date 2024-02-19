@@ -8,25 +8,6 @@
         "env": []
     },
     {
-        "id": "5b98a8ac.a46758",
-        "type": "http in",
-        "z": "82e56c5416ceb0b7",
-        "name": "",
-        "url": "/data",
-        "method": "post",
-        "upload": false,
-        "swaggerDoc": "",
-        "x": 400,
-        "y": 1320,
-        "wires": [
-            [
-                "f10c4cfae8961698",
-                "bba61009.4459f",
-                "89d56c6a7ff64869"
-            ]
-        ]
-    },
-    {
         "id": "bba61009.4459f",
         "type": "template",
         "z": "82e56c5416ceb0b7",
@@ -35,8 +16,8 @@
         "fieldType": "msg",
         "format": "handlebars",
         "syntax": "mustache",
-        "template": "<!DOCTYPE HTML>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Unfall abgesendet</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.local:1880/ws/data\";\n\n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n\n        function wsConnect() {\n            console.log(\"connect\", wsUri);\n            ws = new WebSocket(wsUri);\n\n            ws.onmessage = function (msg) {\n                var line = \"Unfall wurde abgesendet und wartet auf Bestätigung\";\n                var data = msg.data;\n                line += \"<p>\" + data + \"</p>\";\n                document.getElementById('messages').innerHTML = line;\n            }\n\n            ws.onopen = function () {\n                document.getElementById('status').innerHTML = \"Verbunden\";\n                console.log(\"Verbunden\");\n            }\n\n            ws.onclose = function () {\n                document.getElementById('status').innerHTML = \"Fehler beim Herstellen der Verbindung\";\n                setTimeout(wsConnect, 3000);\n            }\n        }\n    </script>\n    <style>\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            height: 100vh;\n        }\n\n\n        #messages {\n            max-width: 400px;\n            width: 100%;\n            padding: 20px;\n            box-sizing: border-box;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            margin-top: 20px; /* Added margin for separation from logos */\n        }\n\n\n\n        #status {\n            font-style: italic;\n        }\n            header {\n      background-color: #ffffff;\n      padding: 20px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    header img#logo2 {\n      max-width: 200px;\n      height: auto;\n      margin-right: 20px;\n      margin-left: 10px;\n    }\n\n    header img#logo1 {\n      max-width: 50px;\n      height: auto;\n      margin-left: 20px;\n      margin-right: 10px;\n\n    }\n\n    </style>\n</head>\n  <header>\n    <img id=\"logo1\" src=\"http://schulsani.local/jf_logo.png\" alt=\"Logo 1\">\n    <img id=\"logo2\" src=\"http://schulsani.local/ohg_logo.png\" alt=\"Logo 2\">\n  </header>\n\n<body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n    <div id=\"messages\">Unfall wurde abgesendet und wartet auf Bestätigung</div>\n    <hr/>\n    <div id=\"status\"></div>\n</body>\n</html>",
-        "x": 1490,
+        "template": "<!DOCTYPE HTML>\n<html lang=\"de\">\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Unfall abgesendet</title>\n    <script type=\"text/javascript\">\n        var ws;\n        var wsUri = \"ws://schulsani.local:1880/ws/data\";\n\n        var loc = window.location;\n        console.log(loc);\n        if (loc.protocol === \"https:\") { wsUri = \"wss:\"; }\n\n        function wsConnect() {\n            console.log(\"connect\", wsUri);\n            ws = new WebSocket(wsUri);\n\n            ws.onmessage = function (msg) {\n                var line = \"Unfall wurde abgesendet und wartet auf Bestätigung\";\n                var data = msg.data;\n                line += \"<p>\" + data + \"</p>\";\n                document.getElementById('messages').innerHTML = line;\n            }\n\n            ws.onopen = function () {\n                document.getElementById('status').innerHTML = \"Verbunden\";\n                console.log(\"Verbunden\");\n            }\n\n            ws.onclose = function () {\n                document.getElementById('status').innerHTML = \"Fehler beim Herstellen der Verbindung\";\n                setTimeout(wsConnect, 3000);\n            }\n        }\n    </script>\n    <style>\n        body {\n            margin: 0;\n            padding: 0;\n            font-family: Arial, sans-serif;\n            display: flex;\n            flex-direction: column;\n            align-items: center;\n            justify-content: center;\n            height: 100vh;\n        }\n\n\n        #messages {\n            max-width: 400px;\n            width: 100%;\n            padding: 20px;\n            box-sizing: border-box;\n            border: 1px solid #ccc;\n            border-radius: 5px;\n            margin-top: 20px; /* Added margin for separation from logos */\n        }\n\n\n\n        #status {\n            font-style: italic;\n        }\n            header {\n      background-color: #ffffff;\n      padding: 20px;\n      display: flex;\n      justify-content: space-between;\n      align-items: center;\n    }\n\n    header img#logo2 {\n      max-width: 200px;\n      height: auto;\n      margin-right: 20px;\n      margin-left: 10px;\n    }\n\n    header img#logo1 {\n      max-width: 50px;\n      height: auto;\n      margin-left: 20px;\n      margin-right: 10px;\n\n    }\n\n    </style>\n</head>\n  <header>\n    <img id=\"logo1\" src=\"http://schulsani.local/jf_logo.png\" alt=\"Logo 1\">\n    <img id=\"logo2\" src=\"http://schulsani.local/ohg_logo.png\" alt=\"Logo 2\">\n  </header>\n\n<body onload=\"wsConnect();\" onunload=\"ws.disconnect();\">\n    <div id=\"messages\">Unfall wurde abgesendet und wartet auf Bestätigung</div>\n    <hr/>\n    <div id=\"status\"></div>\n</body>\n<footer>\nMade with &#10084; by Paul Schmid. <a href=\"https://github.com/schulsani\">Github</a>\n</footer>\n\n</html>",
+        "x": 1370,
         "y": 1460,
         "wires": [
             [
@@ -106,8 +87,8 @@
         "name": "",
         "server": "fc0e0a42a2d7faab",
         "client": "",
-        "x": 1770,
-        "y": 1820,
+        "x": 1730,
+        "y": 2140,
         "wires": []
     },
     {
@@ -173,8 +154,9 @@
         "y": 1600,
         "wires": [
             [
+                "761d46d0999ef86a",
                 "7ff95a34e99d400c",
-                "761d46d0999ef86a"
+                "d7a188ed67dd0780"
             ]
         ]
     },
@@ -201,8 +183,8 @@
         "z": "82e56c5416ceb0b7",
         "mydb": "3e05ca2c6348c110",
         "name": "",
-        "x": 1480,
-        "y": 1280,
+        "x": 1240,
+        "y": 1260,
         "wires": [
             []
         ]
@@ -212,7 +194,7 @@
         "type": "function",
         "z": "82e56c5416ceb0b7",
         "name": "Sort Data",
-        "func": "const jsonString = msg.payload;\ntry {\n    const payload = JSON.parse(jsonString);\n\n    // Nun kannst du auf die einzelnen Werte zugreifen\n    var raum = payload.raum;\n    var unfall = payload.unfall;\n    var art = payload.type;\n\n    msg.payload = \"Raum : \" + raum + \" Unfall : \" + unfall + \" Art : \" + art\n    return msg;\n} catch (error) {\n    console.error('Fehler beim Parsen der JSON-Antwort:', error);\n}\n",
+        "func": "const jsonString = msg.payload;\ntry {\n    const payload = JSON.parse(jsonString);\n\n    // Nun kannst du auf die einzelnen Werte zugreifen\n    var raum = payload.raum;\n    var unfall = payload.unfall;\n    var art = payload.type;\n\n    msg.payload = \"Raum : \" + raum + \", Unfall : \" + unfall + \", Art : \" + art\n    return msg;\n} catch (error) {\n    console.error('Fehler beim Parsen der JSON-Antwort:', error);\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -240,8 +222,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1390,
-        "y": 1080,
+        "x": 1290,
+        "y": 1060,
         "wires": []
     },
     {
@@ -257,7 +239,8 @@
         "wires": [
             [
                 "b8258d69c583f91a",
-                "adcd01dc12eb632c"
+                "adcd01dc12eb632c",
+                "e6eab5fb6728b0cb"
             ]
         ]
     },
@@ -290,7 +273,7 @@
                 "00d9a376712756df"
             ],
             [
-                "98354cd3c321a215"
+                "1f6127f46e7b9cc3"
             ]
         ]
     },
@@ -377,8 +360,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1790,
-        "y": 860,
+        "x": 2030,
+        "y": 940,
         "wires": [
             [
                 "b36aa30.3a7276"
@@ -406,16 +389,16 @@
         "id": "98354cd3c321a215",
         "type": "function",
         "z": "82e56c5416ceb0b7",
-        "name": "function 4",
-        "func": "// Access the properties of msg.payload.msg directly\nvar jsonData = msg.payload.msg;\n\n// Check if the required fields are present in the message object\nif (jsonData && jsonData.raum && jsonData.unfall) {\n    var raum = jsonData.raum;\n    var unfall = jsonData.unfall;\n    var message = 'Folgender Unfall ist passiert: In ' + raum + ' ist ' + unfall + ' passiert.' + ' Unfall bestätgen: http://schulsani.local:1880/confirm';\n\n    // Construct the URL with proper encoding\n    var phoneNumber = '4917647058784'; // Replace with your phone number\n    var apiKey = '3267041'; // Replace with your API key\n    var whatsappURL = 'https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(phoneNumber) + '&text=' + encodeURIComponent(message) + '&apikey=' + encodeURIComponent(apiKey);\n\n    // Set the constructed URL as the payload in the output message\n    msg.payload = whatsappURL;\n\n    // Return the message\n    return msg;\n} else {\n    // If required fields are missing in the message object, return an error message\n    return { payload: \"Erforderliche Felder (raum und unfall) im Nachrichtenobjekt fehlen.\" };\n}\n",
+        "name": "prepare api call",
+        "func": "// Access the properties of msg.payload.msg directly\nvar jsonData = msg.payload.msg;\nvar code = msg.payload.code\n// Check if the required fields are present in the message object\nif (jsonData && jsonData.raum && jsonData.unfall) {\n    var raum = jsonData.raum;\n    var unfall = jsonData.unfall;\n    var message = 'Folgender Unfall ist passiert: In ' + raum + ' ist ' + unfall + ' passiert.' + ' Unfall bestätgen: http://schulsani.local:1880/confirm?key=' + code;\n\n    // Construct the URL with proper encoding\n    var phoneNumber = '4917647058784'; // Replace with your phone number\n    var apiKey = '3267041'; // Replace with your API key\n    var whatsappURL = 'https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent(phoneNumber) + '&text=' + encodeURIComponent(message) + '&apikey=' + encodeURIComponent(apiKey);\n\n    // Set the constructed URL as the payload in the output message\n    msg.payload = whatsappURL;\n\n    // Return the message\n    return msg;\n} else {\n    // If required fields are missing in the message object, return an error message\n    return { payload: \"Erforderliche Felder (raum und unfall) im Nachrichtenobjekt fehlen.\" };\n}\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1420,
-        "y": 860,
+        "x": 1660,
+        "y": 900,
         "wires": [
             [
                 "70154cd4.de1444"
@@ -431,11 +414,11 @@
         "method": "get",
         "upload": false,
         "swaggerDoc": "",
-        "x": 410,
-        "y": 1720,
+        "x": 290,
+        "y": 1680,
         "wires": [
             [
-                "2f6934b6547fbe26"
+                "1f5cc42696268344"
             ]
         ]
     },
@@ -449,8 +432,8 @@
         "format": "html",
         "syntax": "mustache",
         "template": "Unfall wurde bestätigt",
-        "x": 910,
-        "y": 1720,
+        "x": 950,
+        "y": 1680,
         "wires": [
             [
                 "d149870cf9632e81",
@@ -492,7 +475,8 @@
         "y": 1700,
         "wires": [
             [
-                "7ff95a34e99d400c"
+                "7ff95a34e99d400c",
+                "d7a188ed67dd0780"
             ]
         ]
     },
@@ -508,7 +492,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1080,
+        "x": 1060,
         "y": 1320,
         "wires": [
             [
@@ -532,8 +516,8 @@
         "z": "82e56c5416ceb0b7",
         "name": "Save to Mysql for Analytics",
         "info": "",
-        "x": 1490,
-        "y": 1240,
+        "x": 1170,
+        "y": 1340,
         "wires": []
     },
     {
@@ -605,6 +589,616 @@
         "x": 1070,
         "y": 1640,
         "wires": []
+    },
+    {
+        "id": "a7e359e1146a9b91",
+        "type": "http in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "url": "/key",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 300,
+        "y": 960,
+        "wires": [
+            [
+                "11d79c23c32ca85b"
+            ]
+        ]
+    },
+    {
+        "id": "11d79c23c32ca85b",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "keys",
+                "pt": "global",
+                "to": "",
+                "tot": "date"
+            },
+            {
+                "t": "set",
+                "p": "payload.key",
+                "pt": "msg",
+                "to": "keys",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 570,
+        "y": 880,
+        "wires": [
+            [
+                "83b9334fa3554cbb"
+            ]
+        ]
+    },
+    {
+        "id": "83b9334fa3554cbb",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 850,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "12ab6468d16365a9",
+        "type": "http in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "url": "data",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 340,
+        "y": 1280,
+        "wires": [
+            [
+                "d6e656de61acc1d8"
+            ]
+        ]
+    },
+    {
+        "id": "d6e656de61acc1d8",
+        "type": "switch",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "property": "req.query.key",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "keys",
+                "vt": "global"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 1280,
+        "wires": [
+            [
+                "f10c4cfae8961698",
+                "89d56c6a7ff64869",
+                "bba61009.4459f",
+                "7f32e98fb6dbfa53"
+            ],
+            [
+                "72cad4a428ced359"
+            ]
+        ]
+    },
+    {
+        "id": "72cad4a428ced359",
+        "type": "template",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "Die Authentifizierung ist fehgeschlagen versuche es erneut",
+        "output": "str",
+        "x": 740,
+        "y": 1240,
+        "wires": [
+            [
+                "063061483cdb0f7f"
+            ]
+        ]
+    },
+    {
+        "id": "063061483cdb0f7f",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 930,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "3c3d38f4ddcc98bb",
+        "type": "http in",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "url": "/api",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 2340,
+        "y": 1380,
+        "wires": [
+            [
+                "a2ad495ed54a04ba"
+            ]
+        ]
+    },
+    {
+        "id": "aaa9562497861cab",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 3540,
+        "y": 1200,
+        "wires": []
+    },
+    {
+        "id": "4f1003429537b8f4",
+        "type": "switch",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "property": "alarm",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "off",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2830,
+        "y": 1240,
+        "wires": [
+            [
+                "4c0a292fac38d711"
+            ],
+            [
+                "59eb32a4b481b8d2"
+            ]
+        ]
+    },
+    {
+        "id": "c72c6d9847194e03",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "503",
+        "headers": {},
+        "x": 3220,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "d7a188ed67dd0780",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm",
+                "pt": "global",
+                "to": "off",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1930,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7f32e98fb6dbfa53",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm",
+                "pt": "global",
+                "to": "on",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "e6eab5fb6728b0cb",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "infos",
+                "pt": "global",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 890,
+        "y": 1000,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4c0a292fac38d711",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "infos",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 3030,
+        "y": 1220,
+        "wires": [
+            [
+                "aaa9562497861cab"
+            ]
+        ]
+    },
+    {
+        "id": "59eb32a4b481b8d2",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Kein Unfall aktiv",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2990,
+        "y": 1320,
+        "wires": [
+            [
+                "c72c6d9847194e03"
+            ]
+        ]
+    },
+    {
+        "id": "35df8d36eac8b41c",
+        "type": "switch",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 2650,
+        "y": 1220,
+        "wires": [
+            [
+                "4f1003429537b8f4",
+                "b5e77771c004321f"
+            ],
+            [
+                "26c0554b4a1a5b80"
+            ]
+        ]
+    },
+    {
+        "id": "b5e77771c004321f",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "alarm",
+                "pt": "msg",
+                "to": "alarm",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2560,
+        "y": 1120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "6c2c3bbf0c0bc882",
+        "type": "http response",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "statusCode": "401",
+        "headers": {},
+        "x": 3040,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "26c0554b4a1a5b80",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "falscher api key",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 2870,
+        "y": 1440,
+        "wires": [
+            [
+                "6c2c3bbf0c0bc882"
+            ]
+        ]
+    },
+    {
+        "id": "a2ad495ed54a04ba",
+        "type": "function",
+        "z": "82e56c5416ceb0b7",
+        "name": "Check Api Key",
+        "func": "var apiKey = msg.payload.key // Extracting the API key from the request URL parameters\n\n// List of valid API keys (replace with your own list)\nvar validApiKeys = [\"e4fYnXN9WhKNfKS34htd8QF\"];\n\n// Check if the provided API key is valid\nif (validApiKeys.includes(apiKey)) {\n    // API key is valid\n    msg.payload = \"on\";\n} else {\n    // API key is not valid\n    msg.statusCode = 403; // Forbidden status code\n    msg.payload = \"Invalid API key\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 2520,
+        "y": 1300,
+        "wires": [
+            [
+                "35df8d36eac8b41c"
+            ]
+        ]
+    },
+    {
+        "id": "4f92d8b5080cd6cd",
+        "type": "function",
+        "z": "82e56c5416ceb0b7",
+        "name": "Check Api Key or code",
+        "func": "var apiKey = msg.payload.key // Extracting the API key from the request URL parameters\nvar whatsappcodes = msg.codes\n// List of valid API keys (replace with your own list)\nvar validApiKeys = [\"XPJBWp2KY4mULg7L9AAuyKw\"];\n\n// Check if the provided API key is valid\nif (validApiKeys.includes(apiKey)) {\n    // API key is valid\n    msg.payload = \"on\";\n} else {\n    // API key is not valid\n    msg.statusCode = 403; // Forbidden status code\n    msg.payload = whatsappcodes + \"Invalid API key\";\n}\nif (whatsappcodes == apiKey) {\n    // API key is valid\n    msg.payload = \"on\";\n} else {\n    // API key is not valid\n    msg.statusCode = 403; // Forbidden status code\n    msg.payload = whatsappcodes + \"Invalid API key\";\n}\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 1820,
+        "wires": [
+            [
+                "8672032b272e6286"
+            ]
+        ]
+    },
+    {
+        "id": "ad33d34f41184c8a",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "Falscher Api Key",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 1780,
+        "wires": [
+            [
+                "d149870cf9632e81"
+            ]
+        ]
+    },
+    {
+        "id": "8672032b272e6286",
+        "type": "switch",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "on",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 1700,
+        "wires": [
+            [
+                "2f6934b6547fbe26"
+            ],
+            [
+                "ad33d34f41184c8a"
+            ]
+        ]
+    },
+    {
+        "id": "1f6127f46e7b9cc3",
+        "type": "function",
+        "z": "82e56c5416ceb0b7",
+        "name": "generate random code",
+        "func": "// Generate a random number between min and max (inclusive)\nvar min = 1; // minimum value\nvar max = 10000; // maximum value\nvar randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;\n\n// Output the random number\nmsg.payload.code = randomNumber;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 820,
+        "wires": [
+            [
+                "98354cd3c321a215",
+                "d03902e0bd55ddf7"
+            ]
+        ]
+    },
+    {
+        "id": "d03902e0bd55ddf7",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "codes",
+                "pt": "flow",
+                "to": "payload.code",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1520,
+        "y": 1060,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f5cc42696268344",
+        "type": "change",
+        "z": "82e56c5416ceb0b7",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "codes",
+                "pt": "msg",
+                "to": "codes",
+                "tot": "flow"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 1600,
+        "wires": [
+            [
+                "4f92d8b5080cd6cd"
+            ]
+        ]
     },
     {
         "id": "61de5090.0f5d9",
